@@ -8,7 +8,7 @@ var zk = new ZooKeeper({
 zk.connect(function(err) {
     if (err) throw err;
     console.log("zk session established, id=%s", zk.client_id);
-    zk.a_create("/clustertest/server", "some value", ZooKeeper.ZOO_SEQUENCE | ZooKeeper.ZOO_PERSISTENT, function(rc, error, path) {
+    zk.a_create("/clustertest/server", "some value", ZooKeeper.ZOO_SEQUENCE | ZooKeeper.ZOO_EPHEMERAL, function(rc, error, path) {
         if (rc != 0) {
             console.log("zk node create result: %d, error: '%s', path=%s", rc, error, path);
         } else {
@@ -27,5 +27,5 @@ http.createServer(function(req, res) {
         'Content-Type': 'text/plain'
     });
     res.end('Hello World\n');
-}).listen(1337, '127.0.0.1');
+}).listen(1332, '127.0.0.1');
 console.log('Server running at http://127.0.0.1:1337/');
